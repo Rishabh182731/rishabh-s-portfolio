@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rishabh Soni</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f5f2ed;
+      --dark: #1a1a1a;
+      --charcoal: #3a3a3a;
+      --mid: #5a5a5a;
+      --light: #9a9a9a;
+      --accent: #c8a96e;
+      --white: #ffffff;
+      --section-pad: 100px 60px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 60px;
+      background: rgba(245,242,237,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--dark); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; flex-wrap: wrap; }
+    .nav-links a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; position: relative; padding-bottom: 2px; transition: color 0.2s; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-links a:hover::after { width: 100%; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); transition: all 0.3s; }
+
+    /* HERO */
+    #home { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 120px 60px 80px; gap: 60px; }
+    .hero-text { max-width: 560px; }
+    .hero-label { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+    h1.hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 7vw, 6rem); font-weight: 900; line-height: 1.0; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 16px; }
+    .hero-tagline { font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); font-weight: 400; margin-bottom: 32px; }
+    .hero-bio { font-size: 1.05rem; line-height: 1.75; color: var(--charcoal); margin-bottom: 44px; max-width: 480px; }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { padding: 14px 32px; background: var(--dark); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--dark); transition: all 0.25s ease; cursor: pointer; }
+    .btn-primary:hover { background: transparent; color: var(--dark); }
+    .btn-secondary { padding: 14px 32px; background: transparent; color: var(--dark); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--dark); transition: all 0.25s ease; }
+    .btn-secondary:hover { background: var(--dark); color: var(--white); }
+    .hero-image-wrap { position: relative; display: flex; justify-content: flex-end; }
+    .hero-image-frame { position: relative; width: 420px; height: 520px; }
+    .hero-image-frame::before { content: ''; position: absolute; top: 18px; right: -18px; width: 100%; height: 100%; border: 2px solid var(--accent); z-index: 0; }
+    .hero-image-frame img, .hero-image-frame .hero-img-placeholder { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero-img-placeholder { background: linear-gradient(135deg, #d4cfc8, #b8b2aa); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* SECTION BASE */
+    section { padding: var(--section-pad); position: relative; }
+    .section-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+    .section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+    h2.section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.15; color: var(--dark); margin-bottom: 56px; }
+
+    /* ABOUT */
+    #about { background: var(--dark); color: var(--white); }
+    #about .section-label { color: var(--accent); }
+    #about .section-label::before { background: var(--accent); }
+    #about h2.section-title { color: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; line-height: 1.4; color: var(--white); margin-bottom: 32px; font-style: italic; }
+    .about-quote-attr { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 40px; display: block; }
+    .about-text { font-size: 1rem; line-height: 1.85; color: #c8c4be; }
+    .about-text p { margin-bottom: 18px; }
+
+    /* SKILLS */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .skill-tag { padding: 8px 18px; border: 1px solid rgba(200,169,110,0.4); color: var(--accent); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--cream); }
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item { display: grid; grid-template-columns: 200px 1fr 180px; gap: 40px; padding: 44px 0; border-bottom: 1px solid rgba(0,0,0,0.1); align-items: start; }
+    .exp-item:first-child { border-top: 1px solid rgba(0,0,0,0.1); }
+    .exp-company { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dark); padding-top: 4px; }
+    .exp-body h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--dark); margin-bottom: 12px; }
+    .exp-body p { font-size: 0.95rem; line-height: 1.75; color: var(--mid); margin-bottom: 12px; }
+    .exp-body ul { margin-top: 8px; padding-left: 18px; }
+    .exp-body ul li { font-size: 0.9rem; line-height: 1.7; color: var(--mid); margin-bottom: 6px; }
+    .exp-date { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; text-align: right; padding-top: 6px; text-transform: uppercase; }
+
+    /* EDUCATION */
+    #education { background: #eeeae3; }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .edu-card { padding: 44px; background: var(--white); position: relative; overflow: hidden; }
+    .edu-card::after { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--accent); }
+    .edu-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .edu-card .edu-inst { font-size: 0.85rem; color: var(--mid); margin-bottom: 20px; letter-spacing: 0.05em; }
+    .edu-card .edu-grades { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .edu-card .edu-grades li { font-size: 0.88rem; color: var(--charcoal); display: flex; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .edu-card .edu-grades li:last-child { border-bottom: none; }
+    .edu-card .edu-grades li strong { color: var(--dark); font-weight: 600; }
+    .grade-highlight { color: var(--accent) !important; font-weight: 700 !important; }
+    .edu-extras { margin-top: 28px; }
+    .edu-extras h4 { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 12px; margin-top: 20px; }
+    .edu-extras ul { list-style: none; }
+    .edu-extras ul li { font-size: 0.88rem; color: var(--mid); padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.05); line-height: 1.5; }
+    .edu-extras ul li:last-child { border-bottom: none; }
+
+    /* PROJECTS */
+    #projects { background: var(--dark); }
+    #projects .section-label { color: var(--accent); }
+    #projects .section-label::before { background: var(--accent); }
+    #projects h2.section-title { color: var(--white); }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; align-items: stretch; }
+    .project-card { background: #242424; padding: 40px; border: 1px solid rgba(255,255,255,0.06); position: relative; transition: transform 0.25s ease, border-color 0.25s; display: flex; flex-direction: column; height: 100%; }
+    .project-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .project-year { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--accent); font-weight: 600; text-transform: uppercase; margin-bottom: 16px; }
+    .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white); margin-bottom: 14px; line-height: 1.35; }
+    .project-card p { font-size: 0.9rem; color: #999; line-height: 1.7; margin-bottom: 20px; flex: 1; }
+    .project-tag { display: inline-block; padding: 4px 12px; background: rgba(200,169,110,0.15); border: 1px solid rgba(200,169,110,0.3); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* CERTIFICATIONS */
+    #certifications { background: var(--cream); }
+    .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .cert-card { background: var(--white); padding: 40px 36px; border-bottom: 3px solid transparent; transition: border-color 0.25s, transform 0.25s; }
+    .cert-card:hover { border-bottom-color: var(--accent); transform: translateY(-3px); }
+    .cert-icon { width: 44px; height: 44px; background: var(--dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .cert-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .cert-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--dark); margin-bottom: 8px; line-height: 1.35; }
+    .cert-card p { font-size: 0.82rem; color: var(--mid); letter-spacing: 0.04em; }
+
+    /* ACHIEVEMENTS */
+    #achievements { background: #eeeae3; }
+    .ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .ach-card { background: var(--white); padding: 36px; }
+    .ach-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--dark); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .ach-card ul { list-style: none; }
+    .ach-card ul li { font-size: 0.9rem; color: var(--mid); padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); line-height: 1.5; display: flex; align-items: flex-start; gap: 10px; }
+    .ach-card ul li::before { content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+    .ach-card ul li:last-child { border-bottom: none; }
+
+    /* RECOMMENDATIONS */
+    #recommendations { background: var(--dark); }
+    #recommendations .section-label { color: var(--accent); }
+    #recommendations .section-label::before { background: var(--accent); }
+    #recommendations h2.section-title { color: var(--white); }
+    .rec-placeholder { text-align: center; padding: 60px 40px; border: 1px solid rgba(255,255,255,0.08); }
+    .rec-placeholder p { color: #666; font-size: 0.95rem; line-height: 1.7; }
+
+    /* CONTACT */
+    #contact { background: var(--cream); padding: 100px 60px; }
+    #contact .section-label { justify-content: flex-start; }
+    #contact h2.section-title { text-align: left; }
+    .contact-subtitle { font-size: 1rem; color: var(--mid); line-height: 1.7; max-width: 520px; margin: -30px 0 48px; }
+    .contact-form { max-width: 560px; margin: 0 auto 60px; display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 16px 20px; background: var(--white); border: 1px solid rgba(0,0,0,0.12); color: var(--dark); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s; resize: vertical; }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: #aaa; }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); }
+    .contact-form textarea { min-height: 140px; }
+    .contact-form button { padding: 16px; background: var(--dark); color: var(--white); border: none; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+    .contact-form button:hover { opacity: 0.8; }
+    .contact-links { display: flex; justify-content: flex-start; gap: 48px; flex-wrap: wrap; }
+    .contact-link { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; transition: transform 0.2s; }
+    .contact-link:hover { transform: translateY(-3px); }
+    .contact-link-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+    .contact-link-value { font-size: 0.95rem; color: var(--charcoal); }
+
+    footer { background: var(--dark); color: #555; text-align: center; padding: 24px; font-size: 0.8rem; letter-spacing: 0.06em; }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; flex-direction: column; gap: 20px; position: absolute; top: 64px; left: 0; right: 0; background: var(--cream); padding: 24px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      #home { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+      .hero-image-wrap { justify-content: center; }
+      .hero-image-frame { width: 280px; height: 350px; }
+      section { padding: 70px 24px; }
+      .about-grid, .edu-grid, .ach-grid { grid-template-columns: 1fr; gap: 28px; }
+      .exp-item { grid-template-columns: 1fr; gap: 12px; }
+      .exp-date { text-align: left; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      #contact { padding: 70px 24px; grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">Rishabh Soni</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#recommendations">Recommendations</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-text fade-up">
+      <div class="hero-label">Hello! My name is…</div>
+      <h1 class="hero-name">Rishabh<br>Soni</h1>
+      <p class="hero-tagline">Aspiring Economics &amp; Finance Professional</p>
+      <p class="hero-bio">
+        A driven and detail-oriented BBA student at Mahindra University, building expertise in financial markets, risk management, and economic analysis — with real-world internship experience at India's leading wealth management firms.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Get in Touch</a>
+        <a href="https://drive.google.com/uc?export=download&id=1OB2pmhWZZSG2Mzvq9uyKMRomGOVYEsXs" target="_blank" class="btn-secondary" id="resumeBtn">Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap fade-up" style="transition-delay:0.2s">
+      <div class="hero-image-frame">
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/WhatsApp%20Image%202026-05-26%20at%202.58.31%20PM.jpeg" alt="Rishabh Soni" style="width:100%;height:100%;object-fit:cover;object-position:center center;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Statement of Purpose</h2>
+    <div class="about-grid">
+      <div>
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/WhatsApp%20Image%202026-03-21%20at%202.39.25%20PM.jpeg" alt="Rishabh Soni" style="width:100%;max-width:380px;height:460px;object-fit:cover;object-position:center 20%;margin-bottom:32px;display:block;">
+        <p class="about-quote">"It is not in the stars to hold our destiny but ourselves"</p>
+        <span class="about-quote-attr">— The principle that guides my work</span>
+        <div class="skills-grid">
+          <span class="skill-tag">Financial Analysis</span>
+          <span class="skill-tag">Quantitative Analysis</span>
+          <span class="skill-tag">Statistical Modelling</span>
+          <span class="skill-tag">Microsoft Excel</span>
+          <span class="skill-tag">Microsoft PowerPoint</span>
+          <span class="skill-tag">Research &amp; Reporting</span>
+          <span class="skill-tag">Teamwork</span>
+          <span class="skill-tag">Adaptability</span>
+        </div>
+      </div>
+      <div class="about-text fade-up">
+        <p>I am currently pursuing a BBA in Economics and Finance at Mahindra University, building a strong academic foundation. With a strong work ethic, I believe in putting in consistent effort to achieve excellence.</p>
+        <p>At the same time, I value smart work — finding efficient and thoughtful ways to solve problems. I am a fast learner who adapts quickly to new challenges and dynamic environments. My approach combines analytical thinking with practical execution.</p>
+        <p>As a leader, I strive to guide with clarity, responsibility, and integrity. I believe true leadership also requires compassion and understanding toward others. I am driven to grow into a professional who not only understands numbers and trends, but also contributes meaningfully — creating value, building trust, and making an impact in the world of finance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Work</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-list">
+
+      <div class="exp-item fade-up">
+        <div class="exp-company"><img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/logo_kotak.jpeg" alt="Kotak" style="width:140px;height:70px;object-fit:contain;display:block;margin-bottom:14px;background:#fff;padding:6px;border-radius:4px;">Kotak Mahindra Wealth Management &amp; Services</div>
+        <div class="exp-body">
+          <h3>Intern — Private Wealth Division</h3>
+          <p>Conducted a comparative analysis of Kotak Mahindra's Private Wealth division against ICICI Bank, HDFC Bank, and Axis Bank — identifying competitive advantages and suggesting improvements across key parameters. Gained first-hand experience by closely monitoring client meetings with High Net-worth Individuals (HNIs).</p>
+        </div>
+        <div class="exp-date">Jul – Aug 2025</div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-company"><img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/logo_motilal.jpeg" alt="Motilal Oswal" style="width:140px;height:70px;object-fit:contain;display:block;margin-bottom:14px;background:#fff;padding:6px;border-radius:4px;">Motilal Oswal Wealth Management &amp; Services</div>
+        <div class="exp-body">
+          <h3>Intern — Private Wealth Division</h3>
+          <p>Interned at Motilal Oswal Private Wealth, gaining exposure across fund management, asset allocation, and trading operations.</p>
+          <ul>
+            <li>Learned about different types of funds, fund baskets, returns, and fund management techniques practiced by the private wealth division.</li>
+            <li>Drafted financial reports and PowerPoint presentations on funds and fund baskets segmented by risk appetite.</li>
+            <li>Conducted in-depth market research and analysed investment styles, markets, and characteristics.</li>
+            <li>Shadowed the asset allocation and trading team, learning departmental functions and employee roles.</li>
+          </ul>
+        </div>
+        <div class="exp-date">Dec 2024 – Jan 2025</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Academic Background</div>
+    <h2 class="section-title">Coursework &amp; Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card fade-up">
+        <h3>BBA: Economics &amp; Finance</h3>
+        <p class="edu-inst">Mahindra University, Hyderabad — 2023–2026</p>
+        <ul class="edu-grades">
+          <li><span>1st Year CGPA</span><strong>8.25</strong></li>
+          <li><span>2nd Year CGPA</span><strong>8.55</strong></li>
+          <li><span>Time Series Econometrics</span><strong class="grade-highlight">100%</strong></li>
+          <li><span>Financial Modelling &amp; Computational Finance</span><strong>90%</strong></li>
+          <li><span>Financial Markets</span><strong>91%</strong></li>
+          <li><span>Managerial Economics</span><strong>98%</strong></li>
+          <li><span>Statistics</span><strong class="grade-highlight">99%</strong></li>
+          <li><span>Research Techniques</span><strong>92%</strong></li>
+          <li><span>Game Theory &amp; Business Applications</span><strong>92%</strong></li>
+        </ul>
+        <div class="edu-extras">
+          <h4>Study Abroad</h4>
+          <ul>
+            <li>Entrepreneurship &amp; Innovation — Cornell University, Summer 2024 (Jun 22 – Jul 15)</li>
+            <li>AI-Powered Business Analytics — National University of Singapore, Summer 2025 (Jun 5–20)</li>
+          </ul>
+          <h4>Club &amp; Activities</h4>
+          <ul>
+            <li>Finance Head, Podcast Club — 2025–26</li>
+            <li>Intra Basketball Tournament Winner — 2023</li>
+            <li>Intra Basketball Tournament 3rd Place — 2024</li>
+            <li>Intra Basketball &amp; Cricket Tournaments — 2025</li>
+          </ul>
+        </div>
+      </div>
+      <div class="edu-card fade-up" style="transition-delay:0.15s">
+        <h3>High School Diploma</h3>
+        <p class="edu-inst">Sadhu Vaswani International School, Hyderabad — May 2023</p>
+        <ul class="edu-grades">
+          <li><span>10th Grade</span><strong>89%</strong></li>
+          <li><span>12th Grade (Commerce with Maths)</span><strong>91%</strong></li>
+        </ul>
+        <div class="edu-extras">
+          <h4>Awards &amp; Achievements</h4>
+          <ul>
+            <li>District Level Basketball Tournament Runner-up — 2018</li>
+            <li>Selected for National Basketball Camp, Telangana — 2018</li>
+            <li>3× Intra School Basketball Tournament Winner</li>
+            <li>Interschool Group Dance Competition Winner — 2022</li>
+            <li>Participated in Interschool Athletics (200m Race, Relay)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Research &amp; Work</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <a href="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/greenwashing_report.pdf" target="_blank" style="text-decoration:none;display:flex;">
+        <div class="project-card fade-up" style="cursor:pointer;">
+          <div class="project-year">2024</div>
+          <h3>Impact of Greenwashing on Consumer Behaviour</h3>
+          <p>Investigated how deceptive sustainability claims shape consumer trust, purchasing decisions, and long-term brand loyalty across different industries. Used quantitative analysis including Z-tests and T-tests on 64 respondents.</p>
+          <span class="project-tag">Research Techniques</span>
+          <div style="margin-top:16px;font-size:0.78rem;color:#c8a96e;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">View Report →</div>
+        </div>
+      </a>
+
+      <a href="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/erw_report.pdf" target="_blank" style="text-decoration:none;display:flex;">
+        <div class="project-card fade-up" style="cursor:pointer;transition-delay:0.1s">
+          <div class="project-year">2025</div>
+          <h3>Market Assessment of the Enhanced Rock Weathering (ERW) Industry for WeAct</h3>
+          <p>Conducted a comprehensive market assessment for WeAct.com.au evaluating strategic entry into the ERW carbon removal market. Included PESTEL, Porter's Five Forces, SWOT, VRIO, and Ansoff Matrix analyses.</p>
+          <span class="project-tag">Financial Modelling</span>
+          <div style="margin-top:16px;font-size:0.78rem;color:#c8a96e;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">View Report →</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    
+    <div id="certModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;align-items:center;justify-content:center;" onclick="closeCert()">
+      <div style="position:relative;max-width:90%;max-height:90vh;" onclick="event.stopPropagation()">
+        <img id="certImg" src="" alt="Certificate" style="max-width:100%;max-height:85vh;object-fit:contain;display:block;margin:auto;">
+        <button onclick="closeCert()" style="position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;">X</button>
+      </div>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card fade-up" style="transition-delay:0s;cursor:pointer;" onclick="openCert('https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/cert_nus.jpeg')">
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/logo_nus.png" alt="logo" style="height:50px;object-fit:contain;margin-bottom:16px;display:block;">
+        <h3>AI-Powered Business Analytics (Advanced)</h3>
+        <p>NUS School of Computing &mdash; June 2025 &middot; Letter of Commendation</p>
+        <div style="margin-top:14px;font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">View Certificate &#8594;</div>
+      </div>
+      <div class="cert-card fade-up" style="transition-delay:0.1s;cursor:pointer;" onclick="openCert('https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/cert_cornell.jpeg')">
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/logo_cornell.png" alt="logo" style="height:50px;object-fit:contain;margin-bottom:16px;display:block;">
+        <h3>Cornell Immersion Program</h3>
+        <p>Entrepreneurship &amp; Innovation, Cornell University &mdash; July 2024</p>
+        <div style="margin-top:14px;font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">View Certificate &#8594;</div>
+      </div>
+      <div class="cert-card fade-up" style="transition-delay:0.2s;cursor:pointer;" onclick="openCert('https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/cert_irm.jpeg')">
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/logo_irm.png" alt="logo" style="height:50px;object-fit:contain;margin-bottom:16px;display:block;">
+        <h3>IRM Global Level 1 &mdash; Enterprise Risk Management</h3>
+        <p>Institute of Risk Management &mdash; June 2025 &middot; CPD: 30 Hours &middot; Lifetime Validity</p>
+        <div style="margin-top:14px;font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">View Certificate &#8594;</div>
+      </div>
+      <div class="cert-card fade-up" style="transition-delay:0.25s;cursor:pointer;" onclick="openCert('https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/cert_fisdom.jpeg')">
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/logo_fisdom.png" alt="logo" style="height:50px;object-fit:contain;margin-bottom:16px;display:block;">
+        <h3>Basics of Stock Markets</h3>
+        <p>Fisdom Academy &mdash; February 2024</p>
+        <div style="margin-top:14px;font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">View Certificate &#8594;</div>
+      </div>
+      <div class="cert-card fade-up" style="transition-delay:0.3s;cursor:pointer;" onclick="openCert('https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/cert_cleverharvey.jpeg')">
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/logo_cleverharvey.png" alt="logo" style="height:50px;object-fit:contain;margin-bottom:16px;display:block;">
+        <h3>Jr MBA &mdash; JuniorCEO Program</h3>
+        <p>Clever Harvey &mdash; 2021 &middot; Samsonite, Puma &amp; Infinity Cars</p>
+        <div style="margin-top:14px;font-size:0.75rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">View Certificate &#8594;</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-label">Beyond the Classroom</div>
+    <h2 class="section-title">Achievements &amp; Activities</h2>
+    <div class="ach-grid">
+      <div class="ach-card fade-up">
+        <h3>🏀 Sports</h3>
+        <ul>
+          <li>District Level Basketball Tournament Runner-up (2018)</li>
+          <li>Selected for National Basketball Camp, Telangana (2018)</li>
+          <li>3× Intra School Basketball Tournament Winner</li>
+          <li>Intra College Basketball Tournament Winner (2023)</li>
+          <li>Intra College Basketball 3rd Place (2024)</li>
+          <li>Participated in Intra College Basketball &amp; Cricket (2025)</li>
+          <li>Interschool Athletics — 200m Race &amp; Relay</li>
+        </ul>
+      </div>
+      <div class="ach-card fade-up" style="transition-delay:0.1s">
+        <h3>🎖️ Awards &amp; Leadership</h3>
+        <ul>
+          <li>Letter of Commendation — NUS Summer Immersion (2025)</li>
+          <li>Finance Head, Podcast Club, Mahindra University (2025–26)</li>
+          <li>Interschool Group Dance Competition Winner (2022)</li>
+          <li>Cornell University Immersion Certificate (2024)</li>
+          <li>NUS School of Computing Certificate of Completion (2025)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECOMMENDATIONS -->
+  <section id="recommendations">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title">Recommendations</h2>
+    <div class="rec-placeholder fade-up">
+      <p>Recommendations from professors, managers, or mentors will appear here.<br>These will be added in the next update!</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:80px;align-items:center;">
+      <div>
+        <div class="section-label">Say Hello</div>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="contact-subtitle">I'm always open to discussing new opportunities, collaborations, or simply connecting.</p>
+        <form class="contact-form" action="https://formspree.io/f/mnjroagl" method="POST">
+          <div class="form-row">
+            <input type="text" name="first_name" placeholder="First Name" required />
+            <input type="text" name="last_name" placeholder="Last Name" />
+          </div>
+          <input type="email" name="email" placeholder="Email Address" required />
+          <textarea name="message" placeholder="Your Message"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <div class="contact-links">
+          <a href="mailto:rishabh.soni1805@gmail.com" class="contact-link">
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">rishabh.soni1805@gmail.com</span>
+          </a>
+          <a href="https://www.linkedin.com/in/rishabh-soni-575423297" target="_blank" class="contact-link">
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">rishabh-soni-575423297</span>
+          </a>
+          <a href="tel:+917702018355" class="contact-link">
+            <span class="contact-link-label">Phone</span>
+            <span class="contact-link-value">+91 77020 18355</span>
+          </a>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <div style="position:absolute;top:18px;right:-18px;width:100%;height:100%;border:2px solid #c8a96e;z-index:0;"></div>
+        <img src="https://raw.githubusercontent.com/Rishabh182731/rishabh-s-portfolio/main/WhatsApp%20Image%202026-03-21%20at%204.18.15%20PM.jpeg" alt="Rishabh Soni" style="position:relative;z-index:1;width:100%;height:520px;object-fit:cover;object-position:center 20%;">
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Rishabh Soni · Hyderabad, India
+  </footer>
+
+  <script>
+
+    function openCert(src) {
+      document.getElementById('certImg').src = src;
+      var m = document.getElementById('certModal');
+      m.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCert() {
+      document.getElementById('certModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeCert(); });
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+      document.querySelectorAll('#home .fade-up').forEach(el => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+    });
+
+  </script>
+</body>
+</html>
